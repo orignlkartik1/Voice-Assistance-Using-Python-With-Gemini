@@ -1,5 +1,11 @@
+<<<<<<< HEAD
 import os
 
+=======
+
+import os
+import speech_recognition as sr
+>>>>>>> 36e01cb (Update the files)
 import pyttsx3 as py
 import datetime as dt
 import wikipedia as wiki
@@ -8,13 +14,18 @@ import pyjokes as pj
 
 import google.generativeai as gen
 
+<<<<<<< HEAD
 gen.configure(api_key="Your_Api_Key")
+=======
+gen.configure(api_key='your_api_key')
+>>>>>>> 36e01cb (Update the files)
 
 def gemini_reply(prompt):
     model = gen.GenerativeModel("gemini-1.5-flash")  # Fast & free
     response = model.generate_content(prompt)
     return response.text
 
+<<<<<<< HEAD
 ### If you wanna integrate OpenAI you can use this
 
 #from openai import OpenAI
@@ -32,6 +43,32 @@ def gemini_reply(prompt):
 #         return response.choices[0].message.content
 #     except Exception as e:
 #         return f"Error: {e}"
+=======
+# Predefined common sites
+sites = {
+    "youtube": "https://youtube.com",
+    "google": "https://google.com",
+    "facebook": "https://facebook.com",
+    "instagram": "https://instagram.com",
+    "twitter": "https://twitter.com",
+    "github": "https://github.com",
+    "linkedin": "https://linkedin.com",
+}
+
+def open_website(query):
+    for name, url in sites.items():
+        if name in query:
+            wb.open(url)
+            return f"Opening {name}..."
+    # If not in dictionary, try guessing
+    words = query.split()
+    for word in words:
+        if word not in ["open", "website"]:
+            wb.open(f"https://{word}.com")
+            return f"Opening {word}.com ..."
+    return "Sorry, I couldn't figure out which website to open."
+
+>>>>>>> 36e01cb (Update the files)
 
 def speak(text):
     print(f"Assistant: {text}")
@@ -55,13 +92,45 @@ def greet():
         speak("Good Evening!")
     speak("I am your voice assistant. How can I help you today?")
 
+<<<<<<< HEAD
 def take():
     return input("You (type your command): ").lower()
+=======
+
+def listen():
+    r = sr.Recognizer()
+    with sr.Microphone() as source:
+        print("Listening...")
+        audio = r.listen(source)
+        try:
+            return r.recognize_google(audio).lower()
+        except:
+            return "Sorry, I didn't catch that."
+
+def write_query(query):
+    print(f"User query : {query}")
+
+
+def open_app(query):
+    if "notepad" in query:
+        os.system("notepad")
+        return "Opening Notepad..."
+    elif "calculator" in query:
+        os.system("calc")
+        return "Opening Calculator..."
+    else:
+        return "Sorry, I don't know that app."
+>>>>>>> 36e01cb (Update the files)
 
 def run():
     greet()
     while True:
+<<<<<<< HEAD
         query = take()
+=======
+        query = listen()
+        write_query(query)
+>>>>>>> 36e01cb (Update the files)
 
         if 'wikipedia' in query:
             speak("Searching Wikipedia...")
@@ -73,6 +142,7 @@ def run():
             except:
                 speak("Sorry, I couldn't find anything.")
 
+<<<<<<< HEAD
         elif 'open youtube' in query:
             speak("Opening YouTube...")
             wb.open("https://www.youtube.com/")
@@ -80,6 +150,11 @@ def run():
         elif 'open google' in query:
             speak("Opening Google...")
             wb.open("https://www.google.com/")
+=======
+        elif "open" in query and "website" in query or "open" in query:
+            response = open_website(query)
+            speak(response)
+>>>>>>> 36e01cb (Update the files)
 
         elif 'time' in query:
             strTime = dt.datetime.now().strftime("%H:%M:%S")
@@ -93,14 +168,28 @@ def run():
             speak("learn anything.......")
             wb.open('https://learn-anything.xyz/')
 
+<<<<<<< HEAD
+=======
+        elif "open" in query:
+            response = open_app(query)
+            speak(response)
+
+>>>>>>> 36e01cb (Update the files)
         elif 'exit' in query or 'bye' in query:
             speak("Goodbye! Have a nice day!")
             break
 
         else:
             speak("Let me think...")
+<<<<<<< HEAD
            # answer = chatgpt_reply(query)
             answer=gemini_reply(query)
             speak(answer)
 
 run()
+=======
+            answer=gemini_reply(query)
+            speak(answer)
+
+run()
+>>>>>>> 36e01cb (Update the files)
