@@ -8,7 +8,7 @@ import pyjokes as pj
 
 import google.generativeai as gen
 
-gen.configure(api_key='Your-api-key')
+gen.configure(api_key='AIzaSyCbON2d7U7BVpWPFH16EnMuii_VEknBecw' )
 
 def gemini_reply(prompt):
     model = gen.GenerativeModel("gemini-1.5-flash")  # Fast & free
